@@ -58,6 +58,9 @@
         200: function(data) {
           processData(data, $this)
         },
+        400: function(data) {
+          processData($.parseJSON(data.responseText), $this)
+        },
         500: function() {
           processError($this)
         },
@@ -89,6 +92,9 @@
         200: function(data) {
             $this.find('input[type=text],textarea').val('')
             processData(data, $this)
+        },
+        400: function(data) {
+            processData($.parseJSON(data.responseText), $this)
         },
         500: function() {
             processError($this)
@@ -205,7 +211,7 @@
       }
     }
   }
-  
+
   function processError($el) {
     var msg = '<div class="alert alert-error">There was a server error.</div>'
       , replace_selector = $el.attr('data-replace')
